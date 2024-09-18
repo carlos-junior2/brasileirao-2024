@@ -29,4 +29,17 @@ app.put('/:sigla', (req, res) => {
     res.status(200).send(timeSelecionado);
 });
 
+app.post('/', (req, res) => {
+    const campos = req.body;
+    tabela2024.push(campos);
+    res.status(200).send(campos);
+});
+
+app.delete('/:sigla', (req, res) => {
+    const s = req.params.sigla.toUpperCase();
+    const time = tabela2024.findIndex((t) => t.sigla === s);
+    const timeRemovido = tabela2024.splice(time, 1);
+    res.status(200).send(timeRemovido);
+});
+
 app.listen(300, () => console.log("servidor rodando com sucesso"));
